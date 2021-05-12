@@ -2,12 +2,12 @@
 
 -- Rodar Back End
 
-cd back-end
-yarn
+cd back-end =>
+yarn =>
 yarn develop
 
 -- Rodar Front 
 
-cd front-end
-yarn
+cd front-end =>
+yarn =>
 yarn dev
