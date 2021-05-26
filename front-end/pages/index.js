@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Col, Input, InputGroup, InputGroupAddon, Row } from "reactstrap";
-import RestaurantList from "../components/RestaurantList";
+import DishesList from "../components/DishesList";
 
 function Home() {
   const [query, updateQuery] = useState("");
@@ -20,7 +20,7 @@ function Home() {
               />
             </InputGroup>
           </div>
-          <RestaurantList search={query} />
+          <DishesList search={query} />
         </Col>
       </Row>
       <style jsx>
