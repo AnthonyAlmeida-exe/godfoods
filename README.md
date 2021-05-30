@@ -1,5 +1,5 @@
 # God's Food :spaghetti:
-![God's Food](godfoods/back-end/public/uploads/godsfood.png)
+![God's Food](/godsfood.png)
 
 O God's Food é um sistema de emissão e acompanhamento de pedidos e cobrança direcionado a restaurantes.
 
