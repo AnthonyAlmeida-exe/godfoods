@@ -1,7 +1,7 @@
 # God's Food :spaghetti:
-![A cool seagull.](/back-end/public/uploads/godsfood.png)
+![God's Food](godfoods/back-end/public/uploads/godsfood.png)
 
-O GodFood’s é um sistema de emissão e acompanhamento de pedidos e cobrança direcionado a restaurantes.
+O God's Food é um sistema de emissão e acompanhamento de pedidos e cobrança direcionado a restaurantes.
 
 ## Características 
 
@@ -14,6 +14,8 @@ O GodFood’s é um sistema de emissão e acompanhamento de pedidos e cobrança 
 - Pagamento online via cartão de crédito
 
 # Executando localmente
+
+Clonar o repositório localmente
 ```shell
 git clone https://github.com/AnthonyAlmeida-exe/godfoods.git
 
@@ -32,9 +34,7 @@ yarn
 yarn develop 
 ```
 
-Em um novo terminal
-
-Executar o front-end 
+Em um novo terminal executar o front-end 
 
 ```shell
 cd front-end
