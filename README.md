@@ -45,7 +45,7 @@ yarn
 yarn dev
 ```
 
-# Estrutra de Diretórios :open_file_folder:
+# Estrutura de Diretórios :open_file_folder:
 
 ```
 godfoods/           # Diretório Root.
