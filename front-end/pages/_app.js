@@ -7,6 +7,11 @@ import fetch from "isomorphic-fetch";
 import Layout from "../components/Layout";
 import AppContext from "../context/AppContext";
 import withData from "../lib/apollo";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import "./styles.css";
+
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 
 class MyApp extends App {
   state = {
@@ -19,10 +24,8 @@ class MyApp extends App {
     // restore cart from cookie, this could also be tracked in a db
     const cart = Cookie.get("cart");
     //if items in cart, set items and total from cookie
-    console.log(cart);
 
     if (typeof cart === "string" && cart !== "undefined") {
-      console.log("foyd");
       JSON.parse(cart).forEach((item) => {
         this.setState({
           cart: { items: JSON.parse(cart), total: item.price * item.quantity },
@@ -31,7 +34,7 @@ class MyApp extends App {
     }
     if (token) {
       // authenticate the token on the server and place set user object
-      fetch("http://localhost:1337/users/me", {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -118,6 +121,7 @@ class MyApp extends App {
       );
     }
   };
+
   render() {
     const { Component, pageProps } = this.props;
 
@@ -134,16 +138,35 @@ class MyApp extends App {
       >
         <Head>
           <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
             rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossOrigin="anonymous"
+          />
+
+          <script src="https://js.stripe.com/v3" />
+          <script
+            type="text/javascript"
+            src="https://platform.linkedin.com/badges/js/profile.js"
+            async
+            defer
+          ></script>
+          <script
+            type="text/javascript"
+            src="https://platform.linkedin.com/badges/js/profile.js"
+            async
+            defer
           />
         </Head>
-
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ChakraProvider>
+          <Flex width="100%" alignItems="center" direction="column">
+            <Flex maxWidth="1460px" width="100%" direction="column">
+              <Header />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+              <Footer />
+            </Flex>
+          </Flex>
+        </ChakraProvider>
       </AppContext.Provider>
     );
   }

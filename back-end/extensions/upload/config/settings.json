@@ -1,0 +1,11 @@
+{
+  "provider": "aws-s3",
+  "providerOptions": {
+    "accessKeyId": "AKIAUAK3IW5RXBLYPA72",
+    "secretAccessKey": "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",
+    "region": "sa-east-1",
+    "params": {
+      "Bucket": "dishesimages"
+    }
+  }
+}

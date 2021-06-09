@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/dishes": {
+    "/products": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Dish"
+                    "$ref": "#/components/schemas/Product"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Dish"
+          "Product"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dish"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Dish"
+          "Product"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDish"
+                "$ref": "#/components/schemas/NewProduct"
               }
             }
           }
         }
       }
     },
-    "/dishes/count": {
+    "/products/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Dish"
+          "Product"
         ],
         "parameters": []
       }
     },
-    "/dishes/{id}": {
+    "/products/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dish"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Dish"
+          "Product"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dish"
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Dish"
+          "Product"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDish"
+                "$ref": "#/components/schemas/NewProduct"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Dish"
+          "Product"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Dish": {
+      "Product": {
         "required": [
           "id"
         ],
@@ -525,8 +525,11 @@
           "name": {
             "type": "string"
           },
-          "description": {
+          "category": {
             "type": "string"
+          },
+          "price": {
+            "type": "number"
           },
           "image": {
             "required": [
@@ -595,8 +598,8 @@
               }
             }
           },
-          "price": {
-            "type": "number"
+          "ingredients": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -604,16 +607,19 @@
           }
         }
       },
-      "NewDish": {
+      "NewProduct": {
         "properties": {
           "name": {
             "type": "string"
           },
-          "description": {
+          "category": {
             "type": "string"
           },
           "price": {
             "type": "number"
+          },
+          "ingredients": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -631,7 +637,7 @@
   },
   "tags": [
     {
-      "name": "Dish"
+      "name": "Product"
     }
   ]
 }

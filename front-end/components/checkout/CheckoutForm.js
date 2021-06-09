@@ -18,10 +18,10 @@ function CheckoutForm() {
     stripe_id: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const appContext = useContext(AppContext);
-  const router = useRouter();
+  const { user, setUser, cart, isAuthenticated } = useContext(AppContext);
 
   function onChange(e) {
     // set the key = to the name property equal to the value typed
@@ -31,36 +31,36 @@ function CheckoutForm() {
   }
 
   async function submitOrder() {
-    // event.preventDefault();
-
-    // // Use elements.getElement to get a reference to the mounted Element.
+    setLoading(true);
     const cardElement = elements.getElement(CardElement);
 
     // get token back from stripe to process credit card
     const token = await stripe.createToken(cardElement);
 
-    console.log("data", token);
     const userToken = Cookies.get("token");
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
       method: "POST",
       headers: userToken && { Authorization: `Bearer ${userToken}` },
       body: JSON.stringify({
-        amount: Number(Math.round(appContext.cart.total + "e2") + "e-2"),
-        dishes: appContext.cart.items,
+        amount: cart.total,
+        dishes: cart.items,
         address: data.address,
         city: data.city,
         state: data.state,
         token: token.token.id,
+        // users_id: user.id,
       }),
     });
 
     if (!response.ok) {
       setError(response.statusText);
+      setLoading(false);
     }
+    setLoading(false);
     alert(
       "Seu pedido foi efetuado com sucesso! Clique na aba meu pedido para acompanha-lo!"
     );
-    router.push("/");
+    window.location.reload();
   }
 
   return (
@@ -84,7 +84,12 @@ function CheckoutForm() {
         </div>
       </FormGroup>
 
-      <CardSection data={data} stripeError={error} submitOrder={submitOrder} />
+      <CardSection
+        data={data}
+        stripeError={error}
+        submitOrder={submitOrder}
+        loading={loading}
+      />
 
       <style jsx global>
         {`
@@ -97,7 +102,7 @@ function CheckoutForm() {
             padding: 30px;
             background: #fff;
             border-radius: 6px;
-            margin-top: 90px;
+            margin-top: 20px;
           }
           .form-half {
             flex: 0.5;

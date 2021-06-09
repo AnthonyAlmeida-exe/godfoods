@@ -13,12 +13,12 @@ function Cart() {
 
   return (
     <div>
-      <Card style={{ padding: "10px 5px" }} className="cart">
-        <CardTitle style={{ margin: 10 }}>Your Order:</CardTitle>
+      <Card className="card">
+        <CardTitle style={{ margin: 10 }}>Seu pedido:</CardTitle>
         <hr />
         <CardBody style={{ padding: 10 }}>
           <div style={{ marginBottom: 6 }}>
-            <small>Items:</small>
+            <small>{cart.items.length > 1 ? "Itens:" : "Item"}</small>
           </div>
           <div>
             {cart.items
@@ -69,47 +69,24 @@ function Cart() {
                   }
                 })
               : null}
-            {isAuthenticated ? (
-              cart.items.length > 0 ? (
-                <div>
-                  <Badge style={{ width: 200, padding: 10 }} color="light">
-                    <h5 style={{ fontWeight: 100, color: "gray" }}>Total:</h5>
-                    <h3>R${appContext.cart.total.toFixed(2)}</h3>
-                  </Badge>
-                  {router.pathname !== "/checkout" && (
-                    <div
-                      style={{
-                        marginTop: 10,
-                        marginRight: 10,
-                      }}
-                    >
-                      <Link href="/checkout">
-                        <Button style={{ width: "100%" }} color="primary">
-                          <a>Order</a>
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <>
-                  {router.pathname === "/checkout" && (
-                    <small
-                      style={{ color: "blue" }}
-                      onClick={() => window.history.back()}
-                    >
-                      back to restaurant
-                    </small>
-                  )}
-                </>
-              )
-            ) : (
-              <h5>Login to Order</h5>
-            )}
+
+            <div>
+              <Badge style={{ width: 200, padding: 10 }} color="light">
+                <h5 style={{ fontWeight: 100, color: "gray" }}>Total:</h5>
+                <h3>R${appContext.cart.total.toFixed(2)}</h3>
+              </Badge>
+            </div>
           </div>
         </CardBody>
       </Card>
-      <style jsx>{`
+      <style jsx global>{`
+        .card {
+          border: 1px solid lightgray;
+          box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14);
+            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+          margin-top: 20px;
+        }
         #item-price {
           font-size: 1.3em;
           color: rgba(97, 97, 97, 1);

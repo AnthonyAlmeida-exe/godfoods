@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { CardElement } from "@stripe/react-stripe-js";
+import AppContext from "../../context/AppContext";
+import { Button, Spinner } from "@chakra-ui/react";
 
 function CardSection(props) {
+  const { isAuthenticated } = useContext(AppContext);
   return (
     <div>
       <div>
-        <label htmlFor="card-element">Credit or debit card</label>
+        <label htmlFor="card-element">Cartão de crédito ou débito</label>
 
         <div>
           <fieldset style={{ border: "none" }}>
@@ -20,7 +23,22 @@ function CardSection(props) {
               </div>
               <br />
               <div className="order-button-wrapper">
-                <button onClick={props.submitOrder}>Confirm order</button>
+                {isAuthenticated ? (
+                  <Button
+                    colorScheme="blue"
+                    isLoading={props.loading}
+                    type="submit"
+                    spinner={<Spinner color="white" />}
+                    onClick={props.submitOrder}
+                  >
+                    Realizar Pedido!
+                  </Button>
+                ) : (
+                  <button disabled>
+                    Retorne para a tela inicial e faça seu login para finalizar
+                    o pedido!
+                  </button>
+                )}
               </div>
               {props.stripeError ? (
                 <div>{props.stripeError.toString()}</div>

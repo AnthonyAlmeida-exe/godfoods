@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import Head from "next/head";
-import Link from "next/link";
-import { Container, Nav, NavItem, Navbar } from "reactstrap";
-import { logout } from "../lib/auth";
-import AppContext from "../context/AppContext";
+
+import { Container } from "reactstrap";
 
 const Layout = (props) => {
   const title = "God's Food";
-  const { user, setUser } = useContext(AppContext);
 
   return (
     <div>
@@ -21,59 +18,20 @@ const Layout = (props) => {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossOrigin="anonymous"
         />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+          rel="stylesheet"
+        />
+
         <script src="https://js.stripe.com/v3" />
+
+        <script
+          type="text/javascript"
+          src="https://platform.linkedin.com/badges/js/profile.js"
+        ></script>
       </Head>
-      <header>
-        <style jsx>
-          {`
-            a {
-              color: white;
-            }
-            h5 {
-              color: white;
-              padding-top: 11px;
-            }
-            .
-          `}
-        </style>
 
-        <Nav className="navbar " style={{ backgroundColor: "#2196f3" }}>
-          <NavItem>
-            <Link href="/">
-              <a className="navbar-brand">Home</a>
-            </Link>
-          </NavItem>
-
-          <NavItem className="ml-auto">
-            {user ? (
-              <h5>{user.username}</h5>
-            ) : (
-              <Link href="/register">
-                <a className="nav-link"> Sign up</a>
-              </Link>
-            )}
-          </NavItem>
-          <NavItem>
-            {user ? (
-              <Link href="/">
-                <a
-                  className="nav-link"
-                  onClick={() => {
-                    logout();
-                    setUser(null);
-                  }}
-                >
-                  Logout
-                </a>
-              </Link>
-            ) : (
-              <Link href="/login">
-                <a className="nav-link">Sign in</a>
-              </Link>
-            )}
-          </NavItem>
-        </Nav>
-      </header>
       <Container>{props.children}</Container>
     </div>
   );
